@@ -43,28 +43,28 @@ public class TestIndex {
         //
         Settings settings = Settings.settingsBuilder()
                                     .put("cluster.name",
-                                         "x_es_cluster")
+                                         "x_cluster_1")
                                     .build();
         //
         Client client = TransportClient.builder()
                                        .settings(settings)
                                        .build()
                                        .addTransportAddress(new InetSocketTransportAddress(InetAddress.getByName("10.128.7.130"),
-                                                                                           9500));
+                                                                                           9301));
         //
         CreateIndexResponse response = client.admin()
                                              .indices()
-                                             .prepareCreate("index_1")
+                                             .prepareCreate("x_index_1")
                                              .setSettings(Settings.builder()
                                                                   .put("number_of_shards",
                                                                        5)
                                                                   .put("number_of_replicas",
                                                                        1)
                                                                   .build())
-                                             .addMapping("index_1",
+                                             .addMapping("x_type_1",
                                                          XContentFactory.jsonBuilder()
                                                                         .startObject()
-                                                                        .startObject("external")
+                                                                        .startObject("x_type_1")
                                                                         .startObject("properties")
                                                                         .startObject("event_id")
                                                                         .field("type",
