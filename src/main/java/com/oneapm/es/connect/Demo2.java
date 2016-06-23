@@ -73,6 +73,18 @@ public class Demo2 {
         request.setSize(1);
         //
         System.out.println(request.toString());
+        //
+        request = client.prepareSearch();
+        request.setIndices("agent10_index-2016-06-13");
+        request.setQuery(QueryBuilders.boolQuery()
+                                      .should(QueryBuilders.matchQuery("a",
+                                                                       "b"))
+                                      .should(QueryBuilders.matchQuery("c",
+                                                                       "d"))
+                                      .must(QueryBuilders.matchQuery("e",
+                                                                     "f")))
+               .addHighlightedField("g");
+        System.out.println(request.toString());
     }
-
+    
 }
